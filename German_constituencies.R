@@ -35,6 +35,8 @@ X = as.data.frame(t(sapply(home_towns, to_lonlat)))
 X$geometry = sf::st_as_sf(X, coords = c("longitude", "latitude"), crs = sf::st_crs(wkshp)) 
 res = X$geometry |> sf::st_join(wkshp) # resolve/check warning: 
 # although coordinates are longitude/latitude, st_intersects assumes that they are planar
+
+# vis 
 ggplot2::ggplot() +
   ggplot2::geom_sf(data = wkshp) +
   ggplot2::geom_sf(data = wkshp[wkshp$WKR_NR %in% res$WKR_NR, ], fill = "red") +
